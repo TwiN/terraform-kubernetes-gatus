@@ -46,8 +46,8 @@ resource "kubernetes_deployment" "gatus" {
           }
           resources {
             requests = {
-              cpu    = var.cpu_requested
-              memory = var.memory_requested
+              cpu    = var.cpu_request
+              memory = var.memory_request
             }
             limits = {
               cpu    = var.cpu_limit
@@ -118,7 +118,7 @@ resource "kubernetes_service" "gatus" {
 }
 
 
-resource "kubernetes_ingress" "ingress" {
+resource "kubernetes_ingress" "gatus" {
   count = var.ingress_host != "" ? 1 : 0
   metadata {
     name      = var.name
