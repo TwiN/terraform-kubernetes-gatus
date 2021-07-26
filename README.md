@@ -7,6 +7,7 @@ For documentation on Gatus, see [TwinProduction/gatus](https://github.com/TwinPr
 ```hcl
 module "gatus" {
   source                     = "TwinProduction/gatus/kubernetes"
+  version                    = "1.0.0"
   configuration_file_content = file("${path.module}/files/gatus.yaml")
 }
 ```
