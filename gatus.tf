@@ -45,11 +45,11 @@ resource "kubernetes_deployment" "gatus" {
             container_port = 8080
           }
           resources {
-            requests = {
+            requests {
               cpu    = var.cpu_request
               memory = var.memory_request
             }
-            limits = {
+            limits {
               cpu    = var.cpu_limit
               memory = var.memory_limit
             }
