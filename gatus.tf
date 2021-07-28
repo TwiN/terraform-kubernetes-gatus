@@ -117,7 +117,6 @@ resource "kubernetes_service" "gatus" {
   }
 }
 
-
 resource "kubernetes_ingress" "gatus" {
   count = var.ingress_host != "" ? 1 : 0
   metadata {
