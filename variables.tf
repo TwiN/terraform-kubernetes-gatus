@@ -15,7 +15,7 @@ variable "image" {
 
 variable "configuration_file_content" {
   type        = string
-  description = 'Content of the Gatus configuration file. Try using something like file("$${path.module}/files/gatus.yaml")'
+  description = "Content of the Gatus configuration file. Try using something like file(\"$${path.module}/files/gatus.yaml\")"
 }
 
 variable "ingress_host" {
