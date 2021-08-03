@@ -7,7 +7,7 @@ For documentation on Gatus, see [TwinProduction/gatus](https://github.com/TwinPr
 ```hcl
 module "gatus" {
   source                     = "TwinProduction/gatus/kubernetes"
-  version                    = "0.0.2"
+  version                    = "0.0.3"
   configuration_file_content = file("${path.module}/files/gatus.yaml")
 }
 ```
@@ -16,7 +16,7 @@ module "gatus" {
 |:-------------------------- |:---------------------------------------- |:----------------------------- |
 | name                       | Name to use for resources                | `gatus`                       | 
 | namespace                  | Namespace in which Gatus will be running | `kube-system`                 |
-| image                      | Image to use for the container           | `twinproduction/gatus:v2.7.0` |
+| image                      | Image to use for the container           | `twinproduction/gatus:v2.8.1` |
 | configuration_file_content | Gatus configuration. See [TwinProduction/gatus](https://github.com/TwinProduction/gatus). | `""` Required |
 | ingress_host               | Ingress host through which Gatus will be exposed. Not created if blank.  | `""` |
 | memory_request             | Memory request                           | `40M`                         |                                                                                                  
