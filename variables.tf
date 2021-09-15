@@ -10,7 +10,7 @@ variable "namespace" {
 
 variable "image" {
   type    = string
-  default = "twinproduction/gatus:v2.8.1"
+  default = "twinproduction/gatus:v3.1.0"
 }
 
 variable "configuration_file_content" {
@@ -19,9 +19,14 @@ variable "configuration_file_content" {
 }
 
 variable "ingress_host" {
-  default     = ""
   type        = string
+  default     = ""
   description = "Ingress host through which Gatus will be exposed. Not created if blank."
+}
+
+variable "ingress_annotations" {
+  type    = map(string)
+  default = {}
 }
 
 variable "memory_request" {

@@ -45,11 +45,11 @@ resource "kubernetes_deployment" "gatus" {
             container_port = 8080
           }
           resources {
-            requests {
+            requests = {
               cpu    = var.cpu_request
               memory = var.memory_request
             }
-            limits {
+            limits = {
               cpu    = var.cpu_limit
               memory = var.memory_limit
             }
@@ -120,8 +120,9 @@ resource "kubernetes_service" "gatus" {
 resource "kubernetes_ingress" "gatus" {
   count = var.ingress_host != "" ? 1 : 0
   metadata {
-    name      = var.name
-    namespace = var.namespace
+    name        = var.name
+    namespace   = var.namespace
+    annotations = var.ingress_annotations
   }
   spec {
     backend {
