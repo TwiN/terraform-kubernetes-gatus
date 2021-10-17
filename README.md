@@ -7,7 +7,7 @@ For documentation on Gatus, see [TwiN/gatus](https://github.com/TwiN/gatus).
 ```hcl
 module "gatus" {
   source                     = "TwiN/gatus/kubernetes"
-  version                    = "1.0.0"
+  version                    = "1.0.1"
   configuration_file_content = file("${path.module}/files/gatus.yaml")
 }
 ```
