@@ -13,14 +13,14 @@ resource "kubernetes_deployment" "gatus" {
     name      = var.name
     namespace = var.namespace
     labels = {
-      "k8s-app" = var.name
+      app = var.name
     }
   }
   spec {
     replicas = 1
     selector {
       match_labels = {
-        k8s-app = var.name
+        app = var.name
       }
     }
     template {
@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "gatus" {
         name      = var.name
         namespace = var.namespace
         labels = {
-          k8s-app = var.name
+          app = var.name
         }
         annotations = {
           // Used to automatically trigger restart on config change
@@ -112,7 +112,7 @@ resource "kubernetes_service" "gatus" {
       port     = 8080
     }
     selector = {
-      k8s-app = var.name
+      app = var.name
     }
   }
 }
