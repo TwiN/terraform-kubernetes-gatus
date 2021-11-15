@@ -141,5 +141,12 @@ resource "kubernetes_ingress" "gatus" {
         }
       }
     }
+    dynamic "tls" {
+      for_each = var.ingress_tls_secret_name == "" ? [] : [1]
+      content {
+        secret_name = var.ingress_tls_secret_name
+        hosts = [var.ingress_host]
+      }
+    }
   }
 }

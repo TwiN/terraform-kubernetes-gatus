@@ -10,7 +10,7 @@ variable "namespace" {
 
 variable "image" {
   type    = string
-  default = "twinproduction/gatus:v3.2.2"
+  default = "twinproduction/gatus:v3.3.3"
 }
 
 variable "configuration_file_content" {
@@ -27,6 +27,12 @@ variable "ingress_host" {
 variable "ingress_annotations" {
   type    = map(string)
   default = {}
+}
+
+variable "ingress_tls_secret_name" {
+  type        = string
+  default     = ""
+  description = "Secret name to use for TLS"
 }
 
 variable "memory_request" {
