@@ -10,7 +10,7 @@ variable "namespace" {
 
 variable "image" {
   type    = string
-  default = "twinproduction/gatus:v3.3.3"
+  default = "twinproduction/gatus:v4.2.0"
 }
 
 variable "configuration_file_content" {

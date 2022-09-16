@@ -1,4 +1,4 @@
-resource "kubernetes_config_map" "gatus" {
+resource "kubernetes_config_map_v1" "gatus" {
   metadata {
     name      = var.name
     namespace = var.namespace
@@ -8,7 +8,7 @@ resource "kubernetes_config_map" "gatus" {
   }
 }
 
-resource "kubernetes_deployment" "gatus" {
+resource "kubernetes_deployment_v1" "gatus" {
   metadata {
     name      = var.name
     namespace = var.namespace
@@ -32,7 +32,7 @@ resource "kubernetes_deployment" "gatus" {
         }
         annotations = {
           // Used to automatically trigger restart on config change
-          config_hash = sha1(jsonencode(kubernetes_config_map.gatus.data))
+          config_hash = sha1(jsonencode(kubernetes_config_map_v1.gatus.data))
         }
       }
       spec {
@@ -91,7 +91,7 @@ resource "kubernetes_deployment" "gatus" {
         volume {
           name = "${var.name}-config"
           config_map {
-            name = kubernetes_config_map.gatus.metadata[0].name
+            name = kubernetes_config_map_v1.gatus.metadata[0].name
           }
         }
         node_selector = var.node_selector
@@ -100,7 +100,7 @@ resource "kubernetes_deployment" "gatus" {
   }
 }
 
-resource "kubernetes_service" "gatus" {
+resource "kubernetes_service_v1" "gatus" {
   metadata {
     name      = var.name
     namespace = var.namespace
@@ -117,7 +117,7 @@ resource "kubernetes_service" "gatus" {
   }
 }
 
-resource "kubernetes_ingress" "gatus" {
+resource "kubernetes_ingress_v1" "gatus" {
   count = var.ingress_host != "" ? 1 : 0
   metadata {
     name        = var.name
@@ -125,17 +125,17 @@ resource "kubernetes_ingress" "gatus" {
     annotations = var.ingress_annotations
   }
   spec {
-    backend {
-      service_name = var.name
-      service_port = 8080
-    }
     rule {
       host = var.ingress_host
       http {
         path {
           backend {
-            service_name = var.name
-            service_port = 8080
+            service {
+              name = var.name
+              port {
+                number = 8080
+              }
+            }
           }
           path = "/"
         }
