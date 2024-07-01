@@ -94,6 +94,12 @@ resource "kubernetes_deployment_v1" "gatus" {
             name = kubernetes_config_map_v1.gatus.metadata[0].name
           }
         }
+        security_context {
+          sysctl { # Needed for ICMP to work without root privileges
+            name  = "net.ipv4.ping_group_range"
+            value = "0 65536"
+          }
+        }
         node_selector = var.node_selector
       }
     }
